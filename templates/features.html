@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - NEXA AI Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            margin: 0 -2rem 3rem -2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .feature h2 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .feature p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .feature ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .feature li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .demo {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .demo h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .commands {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .command {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .command h4 {
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .command p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .cta h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-btn {
+            background: #2563eb;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .cta-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .commands {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="logo">NEXA</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/features" class="active">Features</a></li>
+                <li><a href="/history">History</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <section class="header">
+            <h1>NEXA Features</h1>
+            <p>Discover what your AI assistant can do</p>
+        </section>
+
+        <div class="container">
+            <div class="feature">
+                <h2>🎵 Music & Video Playback</h2>
+                <p>NEXA can play your favorite music and videos on YouTube with simple voice commands.</p>
+                <ul>
+                    <li>Play specific songs or artists</li>
+                    <li>Search and play videos</li>
+                    <li>Open YouTube automatically</li>
+                    <li>Natural language commands</li>
+                </ul>
+            </div>
+
+            <div class="feature">
+                <h2>📱 WhatsApp Messaging</h2>
+                <p>Send WhatsApp messages automatically without touching your phone.</p>
+                <ul>
+                    <li>Send messages to contacts</li>
+                    <li>Custom message content</li>
+                    <li>Scheduled messaging</li>
+                    <li>Quick message templates</li>
+                </ul>
+            </div>
+
+            <div class="feature">
+                <h2>📝 Todo List Management</h2>
+                <p>Keep track of your tasks and stay organized with NEXA.</p>
+                <ul>
+                    <li>Add new tasks</li>
+                    <li>Delete completed tasks</li>
+                    <li>View all tasks</li>
+                    <li>Database persistence</li>
+                </ul>
+            </div>
+
+            <div class="feature">
+                <h2>💬 Intelligent Conversations</h2>
+                <p>Have meaningful conversations with NEXA powered by advanced AI.</p>
+                <ul>
+                    <li>Natural language processing</li>
+                    <li>Context-aware responses</li>
+                    <li>Multi-turn conversations</li>
+                    <li>Knowledge base integration</li>
+                </ul>
+            </div>
+
+            <div class="demo">
+                <h2>Try These Commands</h2>
+                <div class="commands">
+                    <div class="command">
+                        <h4>🎵 "Play music"</h4>
+                        <p>Opens YouTube to play music</p>
+                    </div>
+                    <div class="command">
+                        <h4>📱 "Send WhatsApp message"</h4>
+                        <p>Sends a message via WhatsApp</p>
+                    </div>
+                    <div class="command">
+                        <h4>📝 "Add task: Buy groceries"</h4>
+                        <p>Adds a new task to your list</p>
+                    </div>
+                    <div class="command">
+                        <h4>🗑️ "Delete first task"</h4>
+                        <p>Removes the first task from list</p>
+                    </div>
+                    <div class="command">
+                        <h4>📋 "Show tasks"</h4>
+                        <p>Displays all your tasks</p>
+                    </div>
+                    <div class="command">
+                        <h4>💬 "Hello NEXA"</h4>
+                        <p>Starts a conversation</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta">
+                <h2>Ready to Experience NEXA?</h2>
+                <p>Start using NEXA today and discover how AI can make your life easier.</p>
+                <a href="/" class="cta-btn">Try NEXA Now</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 NEXA AI Assistant. All rights reserved.</p>
+    </footer>
+</body>
+</html>

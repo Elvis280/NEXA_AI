@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - NEXA AI Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            margin: 0 -2rem 3rem -2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h2 {
+            color: #2563eb;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .contact-details p {
+            color: #666;
+            margin: 0;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h2 {
+            color: #2563eb;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .faq {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-answer {
+            padding: 0 1rem 1rem;
+            color: #666;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="logo">NEXA</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/features">Features</a></li>
+                <li><a href="/history">History</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <section class="header">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team for support and feedback</p>
+        </section>
+
+        <div class="container">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">@</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p>jarvis@example.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h3>Address</h3>
+                        <p>AI Lab, Tech City<br>123 Innovation Street<br>San Francisco, CA 94105</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div class="contact-details">
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h2>Send us a Message</h2>
+                <form method="POST" action="/contact">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    How does NEXA work?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    NEXA uses advanced AI technology to understand your commands and perform various tasks like playing music, sending messages, managing your todo list, and having conversations.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is NEXA free to use?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    Yes, NEXA is completely free to use. You can access all features without any subscription or payment required.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Can NEXA access my personal data?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    NEXA only processes the commands you give it and doesn't store or access your personal data. Your privacy is our top priority.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    What devices are supported?
+                    <span>+</span>
+                </button>
+                <div class="faq-answer">
+                    NEXA works on any device with a web browser, including computers, tablets, and smartphones. It's fully responsive and optimized for all screen sizes.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 NEXA AI Assistant. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+                
+                // Close all other answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+                document.querySelectorAll('.faq-question span').forEach(s => s.textContent = '+');
+                
+                // Toggle current answer
+                if (!isActive) {
+                    answer.classList.add('active');
+                    this.querySelector('span').textContent = '-';
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function() {
+            this.querySelector('.btn').textContent = 'Sending...';
+            this.querySelector('.btn').disabled = true;
+        });
+    </script>
+</body>
+</html>
