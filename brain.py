@@ -1,7 +1,7 @@
 import os
-import pywhatkit as kit
 from groq import Groq
 import datetime as t
+from twilio.rest import Client
 import json
 import database_ops
 import api_secrets
@@ -46,11 +46,18 @@ def play_music(title_of_vid):
 
 def post_social():
     pass
-def send_message( params,time,number="+919670986271"):
-    hr=int(time[0])
-    minutes=int(time[1])+1
-    msg=params['message']
-    kit.sendwhatmsg(number, msg, hr, minutes, 30, True, 5)
+def send_message( params):
+    account_sid = 'AC8a9a27b995de81b60a6375576aa3222d'
+    auth_token = '70d5eb9d965da82ac35e05955a5cbd2b'
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+    from_='whatsapp:+14155238886',
+    body=params['message'],
+    to='whatsapp:+918081874158'
+    )
+
+    print(message.sid)
 
 
 def todo_list(action, parm=" "):
@@ -124,9 +131,8 @@ def process_query(user_query):
                 
         elif data['action'] == "send_message":
             try:
-                now = t.datetime.now() + t.timedelta(minutes=1)
-                hr, minutes = now.hour, now.minute
-                send_message(data['params'], (hr, minutes))
+
+                send_message(data['params'])
 
                 result["ans"] = data['ans']
                 result["action_taken"] = f"Sent WhatsApp message: {data['params']['message']}"
