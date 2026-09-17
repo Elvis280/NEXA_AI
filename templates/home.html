@@ -143,11 +143,18 @@
     <section class="hero">
       <h1>Meet NEXA</h1>
       <p>AI Browser Automation Agent</p>
-      <form id="task-form" class="form-container" aria-label="Ask NEXA">
-        <input type="text" id="goal-input" name="query" placeholder="What should Nexa do?" required aria-label="Your question">
-        <button type="submit" id="run-btn" class="btn">
-          <span class="btn-text">Run Task</span>
-        </button>
+      <form id="task-form" aria-label="Ask NEXA">
+        <div class="api-key-container" style="max-width: 600px; margin: 0 auto 1.5rem auto; text-align: left; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: var(--radius);">
+          <label for="gemini-key" style="display: block; font-weight: 600; margin-bottom: .5rem;">Gemini API Key</label>
+          <input type="password" id="gemini-key" required placeholder="Enter your Gemini API Key" style="width: 100%; padding: .75rem; border-radius: 8px; border: none; outline: none; margin-bottom: .5rem; color: #1e293b;">
+          <p style="font-size: 0.85rem; opacity: 0.9;">Your API key is used to run your Nexa task and is not stored. <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style="color: #ffdda1; text-decoration: underline;">Get an API key</a></p>
+        </div>
+        <div class="form-container">
+          <input type="text" id="goal-input" name="query" placeholder="What should Nexa do?" required aria-label="Your question">
+          <button type="submit" id="run-btn" class="btn">
+            <span class="btn-text">Run Task</span>
+          </button>
+        </div>
       </form>
     </section>
 
@@ -167,6 +174,7 @@
   <script>
     const form = document.getElementById('task-form');
     const input = document.getElementById('goal-input');
+    const apiKeyInput = document.getElementById('gemini-key');
     const btn = document.getElementById('run-btn');
     const btnText = btn.querySelector('.btn-text');
     const activityPanel = document.getElementById('activity-panel');
@@ -183,7 +191,8 @@
       e.preventDefault();
       
       const goal = input.value.trim();
-      if (!goal) return;
+      const apiKey = apiKeyInput.value.trim();
+      if (!goal || !apiKey) return;
 
       btnText.textContent = 'Running...';
       btn.disabled = true;
@@ -199,7 +208,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ goal: goal })
+          body: JSON.stringify({ goal: goal, gemini_api_key: apiKey })
         });
 
         const data = await response.json();

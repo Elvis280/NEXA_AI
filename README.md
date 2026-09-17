@@ -5,20 +5,22 @@ Nexa is a minimal, AI-powered browser automation agent. It uses a LangChain ReAc
 ## Architecture
 
 ```text
-FastAPI
+Nexa FastAPI
  ↓
 LangChain + Gemini
  ↓
 MCP Client
+ ↓
+Streamable HTTP
  ↓
 Render Playwright MCP
  ↓
 Chromium
 ```
 
-- **FastAPI**: Serves the Jinja2 UI and handles API requests.
+- **Nexa FastAPI**: Serves the Jinja2 UI and handles API requests. Nexa acts purely as an **MCP client** for browser automation; it does not host a custom `mcp_server.py`.
 - **LangChain + Gemini**: The core reasoning agent that decides which browser actions to take.
-- **MCP Client**: Connects securely to the remote Playwright MCP server to discover and execute browser tools.
+- **MCP Client**: Connects securely to the remote Playwright MCP server to discover and execute browser tools using Streamable HTTP.
 - **Render Playwright MCP**: A remotely deployed service that actually runs Playwright and Chromium to interact with the web.
 
 ## Local Setup
