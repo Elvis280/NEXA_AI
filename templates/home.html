@@ -142,78 +142,81 @@
   <main class="main">
     <section class="hero">
       <h1>Meet NEXA</h1>
-      <p>Your AI assistant for music, messages, tasks, and conversations</p>
-      <form class="form-container" method="POST" action="/" aria-label="Ask NEXA">
-        <input type="text" name="query" placeholder="Ask me anything..." required aria-label="Your question">
-        <button type="submit" class="btn">
-          <span class="btn-text">Send</span>
+      <p>AI Browser Automation Agent</p>
+      <form id="task-form" class="form-container" aria-label="Ask NEXA">
+        <input type="text" id="goal-input" name="query" placeholder="What should Nexa do?" required aria-label="Your question">
+        <button type="submit" id="run-btn" class="btn">
+          <span class="btn-text">Run Task</span>
         </button>
       </form>
     </section>
 
-    <div class="container">
-      {% if result %}
-      <div class="result">
-        <div class="result-header">
-          <div class="result-icon {{ 'success' if result.status == 'success' else 'error' }}">
-            {{ '✓' if result.status == 'success' else '✗' }}
-          </div>
-          <div>
-            <strong>{{ result.action or 'Response' }}</strong><br>
-            <small>{{ result.timestamp }}</small>
-          </div>
-        </div>
-        <div class="result-message">
-          <strong>You asked:</strong> "{{ result.query }}"<br><br>
-          <strong>NEXA replied:</strong> {{ result.message or 'No response received' }}
-          {% if result.action_taken %}
-            <br><br><strong>Action:</strong> {{ result.action_taken }}
-          {% endif %}
-          {% if result.note %}
-            <br><br><strong>Note:</strong> {{ result.note }}
-          {% endif %}
+    <div class="container" style="max-width: 1200px; margin: auto; padding: 0 1rem;">
+      <div id="activity-panel" style="display: none; background: white; padding: 1.5rem; border-radius: var(--radius); margin: 2rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h3 style="color: var(--primary); margin-bottom: 1rem;">Activity Panel</h3>
+        <div id="log" style="background: #1e293b; color: #10b981; font-family: monospace; padding: 1rem; border-radius: 8px; min-height: 200px; max-height: 400px; overflow-y: auto; line-height: 1.5;">
         </div>
       </div>
-      {% endif %}
-
-      <section class="features">
-        <div class="feature">
-          <h3>🎵 Music & Videos</h3>
-          <p>Play music and videos on YouTube with simple commands</p>
-        </div>
-        <div class="feature">
-          <h3>📱 WhatsApp Messages</h3>
-          <p>Send messages automatically to your contacts</p>
-        </div>
-        <div class="feature">
-          <h3>📝 Todo Management</h3>
-          <p>Add, delete, and view your tasks with natural language</p>
-        </div>
-        <div class="feature">
-          <h3>💬 AI Conversations</h3>
-          <p>Have intelligent conversations and get help with questions</p>
-        </div>
-      </section>
     </div>
   </main>
 
   <footer class="footer">
-    <p>&copy; 2024 NEXA AI Assistant. All rights reserved.</p>
+    <p>&copy; 2026 NEXA AI Assistant. All rights reserved.</p>
   </footer>
 
   <script>
-    const form = document.querySelector('form');
-    const btn = form.querySelector('.btn');
+    const form = document.getElementById('task-form');
+    const input = document.getElementById('goal-input');
+    const btn = document.getElementById('run-btn');
     const btnText = btn.querySelector('.btn-text');
+    const activityPanel = document.getElementById('activity-panel');
+    const log = document.getElementById('log');
 
-    form.addEventListener('submit', function() {
-      btnText.textContent = 'Sending...';
+    function appendLog(message) {
+      const div = document.createElement('div');
+      div.textContent = `> ${message}`;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const goal = input.value.trim();
+      if (!goal) return;
+
+      btnText.textContent = 'Running...';
       btn.disabled = true;
+      activityPanel.style.display = 'block';
+      log.innerHTML = '';
+      
+      appendLog(`Task received: ${goal}`);
+      appendLog('Agent started...');
 
-      setTimeout(() => { // Simulate re-enable after response
-        btnText.textContent = 'Send';
+      try {
+        const response = await fetch('/api/run', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ goal: goal })
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+          appendLog(`Task completed successfully.`);
+          appendLog(`Steps: ${data.steps}`);
+          appendLog(`Message: ${data.message}`);
+        } else {
+          appendLog(`Task failed: ${data.message}`);
+        }
+      } catch (err) {
+        appendLog(`Error: ${err.message}`);
+      } finally {
+        btnText.textContent = 'Run Task';
         btn.disabled = false;
-      }, 3000);
+      }
     });
   </script>
 </body>
